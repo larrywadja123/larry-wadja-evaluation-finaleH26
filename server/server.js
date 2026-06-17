@@ -12,6 +12,12 @@ const livresRoutes = require("./routes/livresRoutes");
 
 app.use("/api/livres", livresRoutes);
 
-app.listen(process.env.PORT, () => {
-    console.log(`Serveur lancé sur le port ${process.env.PORT}`);
-});
+// Export pour les tests
+module.exports = app;
+
+// Démarrer le serveur seulement hors test
+if (process.env.NODE_ENV !== "test") {
+    app.listen(process.env.PORT, () => {
+        console.log(`Serveur lancé sur le port ${process.env.PORT}`);
+    });
+}
